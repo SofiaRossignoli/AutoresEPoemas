@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <div>
+                {{ msg }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form action="/poemas/save" method="post">
+        <div>
+            <label for="titulo">Título: </label>
+            <input type="text" name="titulo" id="titulo">
+        </div>
+        <div>
+            <label for="ano_publicacao">Ano Publicação: </label>
+            <input type="date" name="ano_publicacao" id="ano_publicacao">
+        </div>
+        <div>
+            <label for="autor">Autor: </label>
+            <select name="id_autor" id="autor">
+                <option value=""></option>
+                {% for a in autores %}
+                <option value="{{a.id_autor}}">{{a.nome}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}

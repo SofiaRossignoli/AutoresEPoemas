@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            <div>
+                {{ msg }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="adicionar">
+        <a href="/poemas/add">Adicionar</a>
+    </div>
+    <table>
+        <tr>
+            <th>Título</th>
+            <th>Ano Publicação</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </tr>
+        {% for p in poemas %}
+        <tr>
+            <td>{{p.titulo}}</td>
+            <td>{{p.ano_publicacao}}</td>
+            <td><a href="/poemas/edit/{{p.id_poema}}">[E]</a></td>
+            <td><a href="/poemas/remove/{{p.id_poema}}">[X]</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
